@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Take-Home Pay Calculator</title>
+
+  <meta name="theme-color" content="#0F4C3A" />
+  <meta name="description" content="Estimate your take-home pay from hours worked, hourly wage, and deduction rate." />
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon-192.png" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Take-Home Pay" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <main class="page">
+    <header class="page__header">
+      <h1>Take-Home Pay Calculator</h1>
+      <p class="page__subtitle">Estimate what lands in your account this pay period.</p>
+    </header>
+
+    <form id="pay-form" class="form" novalidate>
+      <div class="field">
+        <label for="hours">Total Hours</label>
+        <input
+          id="hours"
+          name="hours"
+          type="number"
+          inputmode="decimal"
+          placeholder="e.g. 82.5"
+          min="0"
+          step="0.01"
+          required
+        />
+        <span class="field__hint">Hours worked this pay period</span>
+      </div>
+
+      <div class="field">
+        <label for="wage">Hourly Wage</label>
+        <div class="field__prefixed">
+          <span class="field__prefix" aria-hidden="true">$</span>
+          <input
+            id="wage"
+            name="wage"
+            type="number"
+            inputmode="decimal"
+            placeholder="e.g. 23.00"
+            min="0"
+            step="0.01"
+            required
+          />
+        </div>
+        <span class="field__hint">Your regular hourly rate</span>
+      </div>
+
+      <div class="field">
+        <label for="rate">Tax / Deduction Rate</label>
+        <div class="field__suffixed">
+          <input
+            id="rate"
+            name="rate"
+            type="number"
+            inputmode="decimal"
+            placeholder="e.g. 23.5"
+            min="0"
+            max="100"
+            step="0.1"
+            required
+          />
+          <span class="field__suffix" aria-hidden="true">%</span>
+        </div>
+        <span class="field__hint">Combined estimated tax + deductions</span>
+      </div>
+
+      <p id="form-error" class="form__error" role="alert" hidden></p>
+
+      <div class="actions">
+        <button type="submit" class="btn btn--primary">Calculate Pay</button>
+        <button type="button" id="reset-btn" class="btn btn--secondary">Reset</button>
+      </div>
+    </form>
+
+    <section id="results" class="results" hidden aria-live="polite">
+      <div class="results__row">
+        <span class="results__label">Regular Hours</span>
+        <span class="results__value" id="out-regular-hours">0.00 hrs</span>
+      </div>
+      <div class="results__row">
+        <span class="results__label">Overtime Hours</span>
+        <span class="results__value" id="out-overtime-hours">0.00 hrs</span>
+      </div>
+      <div class="results__row">
+        <span class="results__label">Regular Pay</span>
+        <span class="results__value" id="out-regular-pay">$0.00</span>
+      </div>
+      <div class="results__row">
+        <span class="results__label">Overtime Pay</span>
+        <span class="results__value" id="out-overtime-pay">$0.00</span>
+      </div>
+      <div class="results__row results__row--divider">
+        <span class="results__label">Gross Pay</span>
+        <span class="results__value" id="out-gross-pay">$0.00</span>
+      </div>
+      <div class="results__row">
+        <span class="results__label">Estimated Deductions</span>
+        <span class="results__value results__value--negative" id="out-deductions">-$0.00</span>
+      </div>
+
+      <div class="results__final">
+        <span class="results__final-label">Estimated Take-Home Pay</span>
+        <span class="results__final-value" id="out-take-home">$0.00</span>
+      </div>
+
+      <p class="results__disclaimer">
+        This is an estimate only, based on the tax/deduction rate you entered. It is not an official payroll calculation.
+      </p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
